@@ -37,7 +37,6 @@ public class DBConnection {
 			LOGGER.info("Connection for Url: " + url + " Database : "
 					+ database + " User : " + user + " Password : " + passwd);
 			con = DriverManager.getConnection(url + database, user, passwd);
-			System.out.println("Connection Created Successfully.");
 		}
 		return con;
 	}

@@ -12,7 +12,7 @@
 <hr/>
 <h3>Login to enter</h3>
 <span style="color: red;"><c:out value="${errorMessage }" /></span>
-<form action="<%=request.getContextPath() %>/admin/login" method="POST" >
+<form action="<%=request.getContextPath() %>/adminLogin" method="POST" >
 <input type="hidden" name="task" value="login-form"/>
 Enter email : <input type="email" name="email" /> <br>
 Enter Password : <input type="password" name="passwd" /><br>

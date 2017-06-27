@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AdminLogout
  */
-@WebServlet(name = "AdminLogout", urlPatterns = { "/admin/logout" })
+@WebServlet(name = "AdminLogout", urlPatterns = { "/adminLogout" })
 public class AdminLogout extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
 	
+	private static final long serialVersionUID = -4442097404210954543L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Logout called");
 		doPost(request, response);
@@ -33,10 +33,6 @@ public class AdminLogout extends HttpServlet {
 			session.invalidate();
 			request.setAttribute("errorMessage", "Admin Logged Out !!");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
-			//response.sendRedirect(request.getContextPath()+"/admin");
 		}
 	}
-	
-	
-
 }

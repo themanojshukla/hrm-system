@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
 /**
  * Servlet Filter implementation class AdminAuthenticationFilter
  */
-@WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin"})
+@WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin","/addHr", "/hrList"})
 public class AdminAuthenticationFilter implements Filter {
 
 	final static Logger LOGGER = Logger
@@ -37,6 +38,7 @@ public class AdminAuthenticationFilter implements Filter {
 		System.out.println("doFilter called");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession(false);
+		HttpServletResponse res = (HttpServletResponse) response;
 		if (session != null) {
 			if (session.getAttribute("adminName") == null) {
 				System.out.println("Session Not null but adminName not set");
@@ -47,6 +49,9 @@ public class AdminAuthenticationFilter implements Filter {
 			} else {
 				System.out.println("Session not null, fwd to admin Name : "
 						+ session.getAttribute("adminName"));
+				res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		        res.setDateHeader("Expires", 0);
 				chain.doFilter(request, response);
 			}
 		} else if (session == null) {
@@ -55,7 +60,5 @@ public class AdminAuthenticationFilter implements Filter {
 			req.getRequestDispatcher("admin/index.jsp").forward(request,
 					response);
 		}
-
 	}
-
 }

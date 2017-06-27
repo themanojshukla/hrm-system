@@ -12,42 +12,43 @@ import com.hrsytem.init.DBConnection;
 
 public class AdminDAO implements IAdminDAO {
 	final static Logger LOGGER = Logger.getLogger(AdminDAO.class);
-	
+
 	private Admin admin;
-	
+
 	public AdminDAO(Admin admin) {
 		this.admin = admin;
 	}
-	
+
 	@Override
 	public boolean authenticateAdmin() {
-		//System.out.println("Param : " + admin.getEmail() + " " + admin.getPasswd());
+		// System.out.println("Param : " + admin.getEmail() + " " +
+		// admin.getPasswd());
 		String query = "SELECT count(*) as count FROM admin where email = ? and password = ?";
 		boolean returnValue = false;
 		Connection connection = null;
-		PreparedStatement stmt = null;	
+		PreparedStatement stmt = null;
 		ResultSet result = null;
-		try{
+		try {
 			connection = DBConnection.getConnection();
 			stmt = connection.prepareStatement(query);
 			stmt.setString(1, admin.getEmail());
 			stmt.setString(2, admin.getPasswd());
 			result = stmt.executeQuery();
-			
-			if(result.next()){
+
+			if (result.next()) {
 				System.out.println(result.getInt("count"));
-				if(result.getInt("count") > 0)
-				returnValue = true;
+				if (result.getInt("count") > 0)
+					returnValue = true;
 			}
 			stmt.close();
 			result.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-		
+
 		System.out.println(returnValue);
 		return returnValue;
 	}
@@ -57,25 +58,25 @@ public class AdminDAO implements IAdminDAO {
 		String query = "SELECT name FROM admin where email = ?";
 		String returnValue = null;
 		Connection connection = null;
-		PreparedStatement stmt = null;	
+		PreparedStatement stmt = null;
 		ResultSet result = null;
-		try{
+		try {
 			connection = DBConnection.getConnection();
 			stmt = connection.prepareStatement(query);
 			stmt.setString(1, admin.getEmail());
 			result = stmt.executeQuery();
-			if(result.next()){
+			if (result.next()) {
 				returnValue = result.getString("name");
 			}
 			stmt.close();
 			result.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-		
+
 		System.out.println(returnValue);
 
 		return returnValue;
@@ -86,25 +87,25 @@ public class AdminDAO implements IAdminDAO {
 		String query = "SELECT name FROM admin where id = ?";
 		String returnValue = null;
 		Connection connection = null;
-		PreparedStatement stmt = null;	
+		PreparedStatement stmt = null;
 		ResultSet result = null;
-		try{
+		try {
 			connection = DBConnection.getConnection();
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, admin.getId());
 			result = stmt.executeQuery();
-			if(result.next()){
+			if (result.next()) {
 				returnValue = result.getString("name");
 			}
 			stmt.close();
 			result.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-		
+
 		System.out.println(returnValue);
 
 		return returnValue;
@@ -115,28 +116,25 @@ public class AdminDAO implements IAdminDAO {
 		String query = "SELECT id FROM admin where email = ?";
 		int returnValue = 0;
 		Connection connection = null;
-		PreparedStatement stmt = null;	
+		PreparedStatement stmt = null;
 		ResultSet result = null;
-		try{
+		try {
 			connection = DBConnection.getConnection();
 			stmt = connection.prepareStatement(query);
 			stmt.setString(1, admin.getEmail());
 			result = stmt.executeQuery();
-			if(result.next()){
+			if (result.next()) {
 				returnValue = result.getInt("id");
 			}
 			stmt.close();
 			result.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-		
-		System.out.println(returnValue);
-
 		return returnValue;
 	}
-
+	
 }

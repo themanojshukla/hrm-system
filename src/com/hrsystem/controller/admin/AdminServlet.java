@@ -23,12 +23,10 @@ public class AdminServlet extends HttpServlet {
 		if (session != null) {
 			System.out.println("admin main");
 			request.getRequestDispatcher("admin/mainpage.jsp").forward(request,
-					response);;
+					response);
 		} else {
-
 			System.out.println("admin index");
 			response.sendRedirect("admin/index.jsp");
 		}
 	}
-
 }
