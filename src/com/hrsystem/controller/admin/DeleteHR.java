@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hrsystem.dao.IHRDAO;
 import com.hrsystem.dao.impl.HRDAO;
-import com.hrsystem.model.HR;
 
 /**
  * Servlet implementation class DeleteHR
@@ -28,14 +27,10 @@ public class DeleteHR extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String hrId = request.getParameter("hrId");
-
-		HR hr = new HR();
-		hr.setId(Integer.parseInt(hrId));
-		IHRDAO hrDAO = new HRDAO(hr);
-		if (hrDAO.isExistingById()) {
-			hrDAO.removeExisting();
+		IHRDAO hrDAO = new HRDAO();
+		if (hrDAO.isExistingById(Integer.parseInt(hrId))) {
+			hrDAO.removeExistingById(Integer.parseInt(hrId));
 			request.setAttribute("deleteMessage", "<span style='color: green'>HR Deleted Successfully.</span>");
-			//request.getRequestDispatcher("/hrList").forward(request, response);
 			response.sendRedirect(request.getContextPath()+"/hrList");
 		} else {
 			request.setAttribute("deleteMessage", "<span style='color: red'>Sorry...! This HR Doesn't exists.</span>");

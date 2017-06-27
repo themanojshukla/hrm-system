@@ -44,14 +44,15 @@ public class AddRec extends HttpServlet {
 			recruiter.setEmail(email);
 			recruiter.setName(name);
 			recruiter.setPasswd(passwd);
+			recruiter.setSkills(skills);
 			RecruiterDAO recruiterDAO = new RecruiterDAO(recruiter);
-			if (recruiter.isExisting()) {
+			if (recruiterDAO.isExisting()) {
 				session.setAttribute("color", "red");
 				session.setAttribute("recAddMessage",
 						"Oops..!! This is an existing Recruiter.");
 				response.sendRedirect(request.getContextPath() + "/admin");
 			} else {
-				recruiter.addNewHR();
+				recruiterDAO.addNewRecruiter();
 				session.setAttribute("color", "green");
 				session.setAttribute("recAddMessage",
 						"New Recruiter added Successfully.");

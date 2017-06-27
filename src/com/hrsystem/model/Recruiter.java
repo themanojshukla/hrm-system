@@ -1,6 +1,5 @@
 package com.hrsystem.model;
 
-import java.util.List;
 
 public class Recruiter {
 	
@@ -8,7 +7,7 @@ public class Recruiter {
 	private String name;
 	private String email;
 	private String passwd;
-	private List<String> skills;
+	private String skills;
 	public int getId() {
 		return id;
 	}
@@ -33,10 +32,10 @@ public class Recruiter {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-	public List<String> getSkills() {
+	public String getSkills() {
 		return skills;
 	}
-	public void setSkills(List<String> skills) {
+	public void setSkills(String skills) {
 		this.skills = skills;
 	}
 	

@@ -43,7 +43,7 @@ public class AddHR extends HttpServlet {
 			hr.setName(name);
 			hr.setPasswd(passwd);
 			IHRDAO hrDAO = new HRDAO(hr);
-			if (hrDAO.isExistingByEmail()) {
+			if (hrDAO.isExisting()) {
 				session.setAttribute("color", "red");
 				session.setAttribute("hrAddMessage","Oops..!! This is an existing HR.");
 				response.sendRedirect(request.getContextPath() + "/admin");

@@ -28,12 +28,10 @@ public class EditHR extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String hrId = request.getParameter("hrId");
 
-		HR hr = new HR();
-		hr.setId(Integer.parseInt(hrId));
-		IHRDAO hrDAO = new HRDAO(hr);
-		if (hrDAO.isExistingById()) {
-			hr = new HR();
-			hr = hrDAO.getHRById();
+		IHRDAO hrDAO = new HRDAO();
+		if (hrDAO.isExistingById(Integer.parseInt(hrId))) {
+			HR hr = new HR();
+			hr = hrDAO.getHRById(Integer.parseInt(hrId));
 			request.setAttribute("hr",hr);
 			request.getRequestDispatcher("admin/editHr.jsp").forward(request, response);
 			//response.sendRedirect(request.getContextPath() + "/hrList");
