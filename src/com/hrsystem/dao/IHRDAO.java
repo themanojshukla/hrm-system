@@ -26,4 +26,6 @@ public interface IHRDAO {
 	HR getHRByEmail(String email);
 	HR getHRById(int id);
 
+	void updateHr();
+
 }

@@ -1,11 +1,17 @@
 package com.hrsystem.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.hrsystem.dao.IRecruiterDAO;
 import com.hrsystem.model.Recruiter;
+import com.hrsytem.init.DBConnection;
 
 public class RecruiterDAO implements IRecruiterDAO{
+	final static Logger LOGGER = Logger.getLogger(HRDAO.class);
 
 	private Recruiter recruiter;
 	public RecruiterDAO() {
@@ -18,12 +24,28 @@ public class RecruiterDAO implements IRecruiterDAO{
 	
 	@Override
 	public void addNewRecruiter() {
-		
-		
+		String query = "INSERT INTO recruiter(email,name,password,skills) VALUES(?,?,?,?)";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, recruiter.getEmail());
+			stmt.setString(2, recruiter.getName());
+			stmt.setString(3, recruiter.getPasswd());
+			stmt.setString(4, recruiter.getSkills());
+			stmt.executeUpdate();
+			stmt.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Check HR : " + recruiter.getEmail());
+			LOGGER.error("Exception for " + e.getMessage());
+		}
 	}
 	@Override
 	public void removeExistingByEmail(String email) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override

@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IHRDAO;
-import com.hrsystem.dao.impl.HRDAO;
 import com.hrsystem.dao.impl.RecruiterDAO;
-import com.hrsystem.model.HR;
 import com.hrsystem.model.Recruiter;
 
 /**

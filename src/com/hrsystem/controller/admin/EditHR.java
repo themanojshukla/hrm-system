@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hrsystem.dao.IHRDAO;
 import com.hrsystem.dao.impl.HRDAO;
@@ -27,14 +28,17 @@ public class EditHR extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String hrId = request.getParameter("hrId");
-
+		int id = Integer.parseInt(hrId);
 		IHRDAO hrDAO = new HRDAO();
-		if (hrDAO.isExistingById(Integer.parseInt(hrId))) {
+		if (hrDAO.isExistingById(id)) {
 			HR hr = new HR();
 			hr = hrDAO.getHRById(Integer.parseInt(hrId));
-			request.setAttribute("hr",hr);
-			request.getRequestDispatcher("admin/editHr.jsp").forward(request, response);
-			//response.sendRedirect(request.getContextPath() + "/hrList");
+			HttpSession session = request.getSession(false);
+			session.setAttribute("hr",hr);
+			session.setAttribute("color", "blue");
+			session.setAttribute("editHrMessage", "Current Name : "+hr.getName()
+					+"<br> Current Email : "+hr.getEmail()+"<br><br>");
+			response.sendRedirect(request.getContextPath() + "/updateHr");
 		} else {
 			request.setAttribute("message",
 					"<span style='color: red'>Sorry...! This HR Doesn't exists.</span>");

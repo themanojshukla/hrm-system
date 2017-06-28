@@ -18,7 +18,9 @@ import org.apache.log4j.Logger;
 /**
  * Servlet Filter implementation class AdminAuthenticationFilter
  */
-@WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin","/addHr", "/hrList", "/editHr"})
+@WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin", "/addHr",
+		"/hrList", "/editHr", "/updateHr", "/addRec", "/recList", "/editRec",
+		"/updateRec"})
 public class AdminAuthenticationFilter implements Filter {
 
 	final static Logger LOGGER = Logger
@@ -49,9 +51,10 @@ public class AdminAuthenticationFilter implements Filter {
 			} else {
 				System.out.println("Session not null, fwd to admin Name : "
 						+ session.getAttribute("adminName"));
-				res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		        res.setDateHeader("Expires", 0);
+				res.setHeader("Cache-Control",
+						"no-cache, no-store, must-revalidate"); // HTTP 1.1.
+				res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+				res.setDateHeader("Expires", 0);
 				chain.doFilter(request, response);
 			}
 		} else if (session == null) {
