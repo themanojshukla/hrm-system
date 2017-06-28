@@ -49,11 +49,26 @@ public class RecruiterDAO implements IRecruiterDAO{
 	public void removeExistingByEmail(String email) {
 		
 	}
+	
 	@Override
 	public void removeExistingById(int id) {
-		// TODO Auto-generated method stub
-		
+		String query = "DELETE FROM recruiter where id = ?";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Delete Recruiter : " + id);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
 	}
+	
 	@Override
 	public boolean isExisting() {
 		// TODO Auto-generated method stub
@@ -61,13 +76,59 @@ public class RecruiterDAO implements IRecruiterDAO{
 	}
 	@Override
 	public boolean isExistingByEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "SELECT count(*) as count FROM recruiter where email = ?";
+		boolean returnValue = false;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, email);
+			result = stmt.executeQuery();
+
+			if (result.next()) {
+				System.out.println(result.getInt("count"));
+				if (result.getInt("count") > 0)
+					returnValue = true;
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Check Recruiter : " + email);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
 	}
 	@Override
-	public boolean isExistingById(int Id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isExistingById(int id) {
+		String query = "SELECT count(*) as count FROM recruiter where id = ?";
+		boolean returnValue = false;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
+
+			if (result.next()) {
+				System.out.println(result.getInt("count"));
+				if (result.getInt("count") > 0)
+					returnValue = true;
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Check Recruiter : " + id);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
 	}
 	@Override
 	public String getNameByEmail(String email) {

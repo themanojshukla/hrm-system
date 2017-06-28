@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
  * Servlet Filter implementation class AdminAuthenticationFilter
  */
 @WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin", "/addHr",
-		"/hrList", "/editHr", "/updateHr", "/addRec", "/recList", "/editRec",
-		"/updateRec"})
+		"/hrList", "/deleteHr", "/editHr", "/updateHr", "/addRec", "/recList", "/editRec",
+		"/updateRec" ,"/deleteRec"})
 public class AdminAuthenticationFilter implements Filter {
 
 	final static Logger LOGGER = Logger

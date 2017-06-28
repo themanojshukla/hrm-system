@@ -17,13 +17,12 @@ import com.hrsystem.model.Recruiter;
  * Servlet implementation class ListAllRec
  */
 @WebServlet(name = "recList", urlPatterns = { "/recList" })
-public class ListAllRec extends HttpServlet {
+public class ListAllRecruiter extends HttpServlet {
 
 	private static final long serialVersionUID = 3225883686425658366L;
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("MSG");
 		IRecruiterDAO recDAO = new RecruiterDAO();
 		List<Recruiter> recList = recDAO.getRecruiterList();
 		request.setAttribute("recList", recList);

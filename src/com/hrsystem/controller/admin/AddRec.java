@@ -45,7 +45,7 @@ public class AddRec extends HttpServlet {
 			recruiter.setPasswd(passwd);
 			recruiter.setSkills(skills);
 			RecruiterDAO recruiterDAO = new RecruiterDAO(recruiter);
-			if (recruiterDAO.isExisting()) {
+			if (recruiterDAO.isExistingByEmail(email)) {
 				session.setAttribute("color", "red");
 				session.setAttribute("recAddMessage",
 						"Oops..!! This is an existing Recruiter.");
