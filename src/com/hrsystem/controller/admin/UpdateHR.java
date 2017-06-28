@@ -48,12 +48,23 @@ public class UpdateHR extends HttpServlet {
 		session.setAttribute("hr", hr);
 		IHRDAO hrDAO = new HRDAO(hr);
 		if (hrDAO.isExistingById(hr.getId())) {
+			if(hrDAO.isOtherExistingByEmail(hrEmail,id)){
+				session.removeAttribute("hr");
+				session.removeAttribute("editHrMessage");
+				session.setAttribute("color", "red");
+				session.setAttribute("hrAddMessage",
+						"Sorry, This email id already exists for some other HR. !");
+			response.sendRedirect(request.getContextPath() + "/admin");	
+			}
+			else{
 			hrDAO.updateHr();
 			session.removeAttribute("hr");
 			session.removeAttribute("editHrMessage");
 			session.setAttribute("color", "green");
 			session.setAttribute("hrAddMessage", "HR Updated Successfully !");
 			response.sendRedirect(request.getContextPath() + "/admin");
+			}
+			
 		} else {
 			session.removeAttribute("hr");
 			session.removeAttribute("editHrMessage");

@@ -339,5 +339,34 @@ public class HRDAO implements IHRDAO {
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 	}
+	@Override
+	public boolean isOtherExistingByEmail(String hrEmail, int id) {
+		String query = "SELECT count(*) as count FROM hr where email = ? AND id != ?";
+		boolean returnValue = false;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, hrEmail);
+			stmt.setInt(2, id);
+			result = stmt.executeQuery();
+
+			if (result.next()) {
+				System.out.println(result.getInt("count"));
+				if (result.getInt("count") > 0)
+					returnValue = true;
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to check another hr : " + hrEmail);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
+	}
 	
 }

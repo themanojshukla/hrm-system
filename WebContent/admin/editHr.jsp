@@ -40,14 +40,17 @@
 		</td >
 
 		<td style="width: 45%">
-		<div id="addRec">
-		<div id="recMessageBox"></div>
+		<div id="addRec"><span style='color: <c:out value="${color }"  />'><c:out value="${recAddMessage }" /></span>
+		<% session.removeAttribute("recAddMessage"); session.removeAttribute("color");%>
+		<form id="addHr" action="<%=request.getContextPath() %>/addRec" method="POST">
+		
 		Name : <input type="text"  name="recname" /><br>
 		Skills : <input type="text" name="recskills" /><br>
 		Email : <input type="email" name="recemail" /><br>
-		Password : <input type="password" name="recpaawd" /><br><br>
-		<button  onclick="ClearRecFields()">Reset</button> &nbsp; <button onclick="addRec()" >Add to Recruiter</button>
+		Password : <input type="password" name="recpasswd" /><br><br>
+		<input type="reset" value="Reset" /> &nbsp; <input type="submit" value="Add New Recruiter" />
 		
+		</form>
 		</div>
 		</td>
 	</tr>

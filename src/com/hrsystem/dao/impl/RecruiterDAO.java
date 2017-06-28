@@ -2,6 +2,8 @@ package com.hrsystem.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -39,13 +41,12 @@ public class RecruiterDAO implements IRecruiterDAO{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.fatal("Unable to Check HR : " + recruiter.getEmail());
+			LOGGER.fatal("Unable to Add Recruiter : " + recruiter.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 	}
 	@Override
 	public void removeExistingByEmail(String email) {
-		
 		
 	}
 	@Override
@@ -90,13 +91,62 @@ public class RecruiterDAO implements IRecruiterDAO{
 	}
 	@Override
 	public List<Recruiter> getRecruiterList() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM recruiter";
+		List<Recruiter> returnValue = new ArrayList<Recruiter>();
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			result = stmt.executeQuery();
+			while (result.next()) {
+				Recruiter recruiter = new Recruiter();
+				recruiter.setId(result.getInt("id"));
+				recruiter.setName(result.getString("name"));
+				recruiter.setEmail(result.getString("email"));
+				recruiter.setSkills(result.getString("skills"));
+				returnValue.add(recruiter);
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to get the List of Recruiters ");
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
 	}
+	
 	@Override
 	public List<Recruiter> getRecruiterListBySkills(String skills) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM recruiter";
+		List<Recruiter> returnValue = new ArrayList<Recruiter>();
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			result = stmt.executeQuery();
+			while (result.next()) {
+				Recruiter recruiter = new Recruiter();
+				recruiter.setId(result.getInt("id"));
+				recruiter.setName(result.getString("name"));
+				recruiter.setEmail(result.getString("email"));
+				recruiter.setSkills(result.getString("skills"));
+				returnValue.add(recruiter);
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to get the List of HRs ");
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
 	}
 	@Override
 	public Recruiter getRecruiterByEmail(String email) {

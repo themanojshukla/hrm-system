@@ -18,6 +18,8 @@ import com.hrsystem.model.Recruiter;
 @WebServlet(name = "addRec", urlPatterns = {"/addRec"})
 public class AddRec extends HttpServlet {
 
+	private static final long serialVersionUID = 8184451787208501424L;
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/admin");
@@ -34,7 +36,7 @@ public class AddRec extends HttpServlet {
 				|| name.isEmpty() || email.isEmpty() || passwd.isEmpty()
 				|| skills.isEmpty()) {
 			session.setAttribute("color", "red");
-			session.setAttribute("hrAddMessage", "Please fill the form.");
+			session.setAttribute("recAddMessage", "Please fill the form.");
 			response.sendRedirect(request.getContextPath() + "/admin");
 		} else {
 			Recruiter recruiter = new Recruiter();

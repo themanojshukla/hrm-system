@@ -1,3 +1,4 @@
+<%@page import="com.hrsystem.model.Recruiter"%>
 <%@include file="header.jsp"%>
 <table  style="width: 100%;">
 <tr>
@@ -8,7 +9,8 @@
 				<a href="<%=request.getContextPath()%>/admin">Add New Recruiter</a>
 		</span></td>
 		<td style="width: 40%; text-align: center;"> <span style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/recList">List of Recruiters</a>
+				<a href="<%=request.getContextPath()%>/hrList">List of
+					HRs</a>
 		</span></td>
 		</tr>
 </table>
@@ -20,28 +22,30 @@
 		<th style="width: 2%">Sr.</th>
 		<th style="width: 28%">Name</th>
 		<th style="width: 25%">Email</th>
-		<th style="width: 15%">Delete</th>
-		<th style="width: 15%">Edit</th>
+		<th style="width: 10%">Skills</th>
+		<th style="width: 10%">Delete</th>
+		<th style="width: 10%">Edit</th>
 	</tr>
 	
 		<%
 			int i=1;
-				 	List<HR> hrList = (List<HR>) request.getAttribute("hrList");
-				 		for(HR hr: hrList){
+				 	List<Recruiter> recList = (List<Recruiter>) request.getAttribute("recList");
+				 		for(Recruiter rec: recList){
 		%>
 		<tr>
 		<td><%=i++%></td>
-		<td><%=hr.getName()%></td>
-		<td><%=hr.getEmail()%></td>
+		<td><%=rec.getName()%></td>
+		<td><%=rec.getEmail()%></td>
+		<td><%=rec.getSkills()%></td>
 		<td>
-		<form method="POST" action="<%=request.getContextPath() %>/deleteHr">
-		<input type="hidden" name="hrId" value="<%=hr.getId() %>">
+		<form method="POST" action="<%=request.getContextPath() %>/deleteRec">
+		<input type="hidden" name="recId" value="<%=rec.getId() %>">
 		<input type="submit" value="DELETE" />
 		</form>
 		</td>
 		<td>
-		<form method="POST" action="<%=request.getContextPath() %>/editHr">
-		<input type="hidden" name="hrId" value="<%=hr.getId() %>">
+		<form method="POST" action="<%=request.getContextPath() %>/editRec">
+		<input type="hidden" name="hrId" value="<%=rec.getId() %>">
 		<input type="submit" value="EDIT" />
 		</form>
 		</td>

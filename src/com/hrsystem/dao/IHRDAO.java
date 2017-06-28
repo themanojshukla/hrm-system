@@ -28,4 +28,6 @@ public interface IHRDAO {
 
 	void updateHr();
 
+	boolean isOtherExistingByEmail(String hrEmail, int id);
+
 }

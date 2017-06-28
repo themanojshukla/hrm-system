@@ -15,16 +15,15 @@
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/recruiterList">List of
+				<a href="<%=request.getContextPath()%>/recList">List of
 					Recruiters</a>
 		</span>
 		</td>
 
 		<td style="width: 40%">
 		<span style='color: <c:out value="${color }"  />'><c:out value="${hrAddMessage }" /></span>
-		<% session.removeAttribute("hrAddMessage"); session.removeAttribute("color");%>
+		<% session.removeAttribute("hrAddMessage"); %>
 		<form id="addHr" action="<%=request.getContextPath() %>/addHr" method="POST">
-		<!-- <input type="hidden" id="hrurl"  name="hrurl" value="<%=request.getContextPath() %>/addHr" />  -->
 		Name : <input type="text" id="hrname" name="hrname" /><br>
 		Email : <input type="email" id="hremail" name="hremail" /><br>
 		Password : <input type="password" id="hrpasswd" name="hrpasswd" /><br><br>
@@ -40,13 +39,12 @@
 		Name : <input type="text"  name="recname" /><br>
 		Skills : <input type="text" name="recskills" /><br>
 		Email : <input type="email" name="recemail" /><br>
-		Password : <input type="password" name="recpaawd" /><br><br>
+		Password : <input type="password" name="recpasswd" /><br><br>
 		<input type="reset" value="Reset" /> &nbsp; <input type="submit" value="Add New Recruiter" />
 		
 		</form>
 		</td>
-	</tr>
-	
+	</tr>	
 </table>
 
 <%@include file="footer.jsp"%>

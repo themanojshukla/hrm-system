@@ -43,7 +43,6 @@ public class AdminAuthenticationFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		if (session != null) {
 			if (session.getAttribute("adminName") == null) {
-				System.out.println("Session Not null but adminName not set");
 				session.invalidate();
 				request.setAttribute("errorMessage", "Please Login First.");
 				req.getRequestDispatcher("admin/index.jsp").forward(request,
@@ -58,7 +57,6 @@ public class AdminAuthenticationFilter implements Filter {
 				chain.doFilter(request, response);
 			}
 		} else if (session == null) {
-			System.out.println("Session null");
 			request.setAttribute("errorMessage", "Please Login First.");
 			req.getRequestDispatcher("admin/index.jsp").forward(request,
 					response);
