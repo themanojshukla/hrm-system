@@ -13,7 +13,7 @@ import com.hrsystem.model.HR;
 import com.hrsytem.init.DBConnection;
 
 public class HRDAO implements IHRDAO {
-	final static Logger LOGGER = Logger.getLogger(AdminDAO.class);
+	final static Logger LOGGER = Logger.getLogger(HRDAO.class);
 
 	private HR hr;
 	public HRDAO(HR hr) {
@@ -318,6 +318,26 @@ public class HRDAO implements IHRDAO {
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 		return returnValue;
+	}
+	@Override
+	public void updateHr() {
+		String query = "UPDATE hr SET name = ? , email = ? WHERE id = ?";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, hr.getName());
+			stmt.setString(2, hr.getEmail());
+			stmt.setInt(3, hr.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Update HR : " + hr.getEmail());
+			LOGGER.error("Exception for " + e.getMessage());
+		}
 	}
 	
 }
