@@ -15,7 +15,7 @@
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/recruiterList">List of
+				<a href="<%=request.getContextPath()%>/recList">List of
 					Recruiters</a>
 		</span>
 		</td>

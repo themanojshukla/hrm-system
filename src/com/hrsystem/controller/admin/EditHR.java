@@ -18,7 +18,8 @@ import com.hrsystem.model.HR;
  */
 @WebServlet(name = "editHr", urlPatterns = {"/editHr"})
 public class EditHR extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -3696567214067992719L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +32,7 @@ public class EditHR extends HttpServlet {
 		int id = Integer.parseInt(hrId);
 		IHRDAO hrDAO = new HRDAO();
 		if (hrDAO.isExistingById(id)) {
-			HR hr = new HR();
-			hr = hrDAO.getHRById(Integer.parseInt(hrId));
+			HR hr = hrDAO.getHRById(Integer.parseInt(hrId));
 			HttpSession session = request.getSession(false);
 			session.setAttribute("hr",hr);
 			session.setAttribute("color", "blue");

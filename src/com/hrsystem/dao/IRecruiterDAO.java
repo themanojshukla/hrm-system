@@ -14,6 +14,7 @@ public interface IRecruiterDAO {
 	boolean isExisting();
 	boolean isExistingByEmail(String email);
 	boolean isExistingById(int Id);
+	boolean isOtherExistingByEmail(String email, int id);
 
 	String getNameByEmail(String email);
 	String getNameById(int id);
@@ -26,5 +27,7 @@ public interface IRecruiterDAO {
 	
 	Recruiter getRecruiterByEmail(String email);
 	Recruiter getRecruiterById(int id);
+
+	void updateRecruiter();
 	
 }

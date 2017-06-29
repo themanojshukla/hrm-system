@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.hrsystem.dao.IRecruiterDAO;
+import com.hrsystem.model.HR;
 import com.hrsystem.model.Recruiter;
 import com.hrsytem.init.DBConnection;
 
@@ -211,13 +212,113 @@ public class RecruiterDAO implements IRecruiterDAO{
 	}
 	@Override
 	public Recruiter getRecruiterByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM recruiter where email = ?";
+		Recruiter returnValue = null;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, email);
+			result = stmt.executeQuery();
+			if (result.next()) {
+				returnValue=new Recruiter();
+				returnValue.setId(result.getInt("id"));
+				returnValue.setEmail(result.getString("email"));
+				returnValue.setName(result.getString("name"));
+				returnValue.setSkills(result.getString("skills"));
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Recruiter : " + email);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
 	}
 	@Override
 	public Recruiter getRecruiterById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM recruiter where id = ?";
+		Recruiter returnValue = null;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
+			if (result.next()) {
+				returnValue=new Recruiter();
+				returnValue.setId(result.getInt("id"));
+				returnValue.setEmail(result.getString("email"));
+				returnValue.setName(result.getString("name"));
+				returnValue.setSkills(result.getString("skills"));
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to get List of Recruiter : " + id);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
+	}
+
+	@Override
+	public boolean isOtherExistingByEmail(String email, int id) {
+		String query = "SELECT count(*) as count FROM recruiter where email = ? AND id != ?";
+		boolean returnValue = false;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, email);
+			stmt.setInt(2, id);
+			result = stmt.executeQuery();
+
+			if (result.next()) {
+				System.out.println(result.getInt("count"));
+				if (result.getInt("count") > 0)
+					returnValue = true;
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to check another Recruiter : " + email);
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
+	}
+
+	@Override
+	public void updateRecruiter() {
+		String query = "UPDATE recruiter SET name = ? , email = ? , skills = ? WHERE id = ?";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, recruiter.getName());
+			stmt.setString(2, recruiter.getEmail());
+			stmt.setString(3, recruiter.getSkills());
+			stmt.setInt(4, recruiter.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to Update Recruiter : " + recruiter.getEmail());
+			LOGGER.error("Exception for " + e.getMessage());
+		}
 	}
 	
 	

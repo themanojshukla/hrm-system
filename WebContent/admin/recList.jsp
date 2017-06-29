@@ -45,7 +45,7 @@
 		</td>
 		<td>
 		<form method="POST" action="<%=request.getContextPath() %>/editRec">
-		<input type="hidden" name="hrId" value="<%=rec.getId() %>">
+		<input type="hidden" name="recId" value="<%=rec.getId() %>">
 		<input type="submit" value="EDIT" />
 		</form>
 		</td>
