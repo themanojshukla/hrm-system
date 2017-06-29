@@ -9,7 +9,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.hrsystem.dao.IRecruiterDAO;
-import com.hrsystem.model.HR;
 import com.hrsystem.model.Recruiter;
 import com.hrsytem.init.DBConnection;
 
