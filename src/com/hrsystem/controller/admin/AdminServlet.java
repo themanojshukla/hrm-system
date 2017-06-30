@@ -19,10 +19,8 @@ public class AdminServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Admin serv called");
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			System.out.println("admin main");
 			request.getRequestDispatcher("/admin/mainpage.jsp").forward(request,
 					response);
 		}

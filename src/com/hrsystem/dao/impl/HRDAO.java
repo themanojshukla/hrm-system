@@ -38,10 +38,11 @@ public class HRDAO implements IHRDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.fatal("Unable to Check HR : " + hr.getEmail());
+			LOGGER.fatal("Unable to ADD HR : " + hr.getEmail());
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 	}
+
 	@Override
 	public void removeExistingByEmail(String email) {
 		String query = "DELETE FROM hr where email = ?";
@@ -82,7 +83,6 @@ public class HRDAO implements IHRDAO {
 		
 	}
 
-	
 	@Override
 	public boolean isExistingByEmail(String email) {
 		String query = "SELECT count(*) as count FROM hr where email = ?";
@@ -97,7 +97,6 @@ public class HRDAO implements IHRDAO {
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -127,7 +126,6 @@ public class HRDAO implements IHRDAO {
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -264,7 +262,7 @@ public class HRDAO implements IHRDAO {
 		}
 		return returnValue;
 	}
-	
+
 	@Override
 	public HR getHRById(int id) {
 		String query = "SELECT * FROM hr where id = ?";
@@ -288,7 +286,7 @@ public class HRDAO implements IHRDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.fatal("Unable to get ID for HR : " + id);
+			LOGGER.fatal("Unable to get HR for ID : " + id);
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 		return returnValue;
@@ -311,7 +309,6 @@ public class HRDAO implements IHRDAO {
 			}
 			stmt.close();
 			result.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.fatal("Unable to get ID for HR : " + email);
@@ -319,6 +316,7 @@ public class HRDAO implements IHRDAO {
 		}
 		return returnValue;
 	}
+
 	@Override
 	public void updateHr() {
 		String query = "UPDATE hr SET name = ? , email = ? WHERE id = ?";
@@ -339,6 +337,7 @@ public class HRDAO implements IHRDAO {
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 	}
+
 	@Override
 	public boolean isOtherExistingByEmail(String hrEmail, int id) {
 		String query = "SELECT count(*) as count FROM hr where email = ? AND id != ?";
@@ -354,7 +353,6 @@ public class HRDAO implements IHRDAO {
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -368,5 +366,36 @@ public class HRDAO implements IHRDAO {
 		}
 		return returnValue;
 	}
+
+	@Override
+	public boolean authenticateHR() {
+		String query = "SELECT count(*) as count FROM hr where email = ? and password = ?";
+		boolean returnValue = false;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, hr.getEmail());
+			stmt.setString(2, hr.getPasswd());
+			result = stmt.executeQuery();
+
+			if (result.next()) {
+				if (result.getInt("count") > 0)
+					returnValue = true;
+			}
+			stmt.close();
+			result.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.fatal("Unable to authenticate HR : " + hr.getEmail());
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		return returnValue;
+
+	}
+	
 	
 }

@@ -30,4 +30,6 @@ public interface IHRDAO {
 
 	boolean isOtherExistingByEmail(String hrEmail, int id);
 
+	boolean authenticateHR();
+
 }

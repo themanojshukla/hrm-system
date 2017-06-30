@@ -88,7 +88,6 @@ public class RecruiterDAO implements IRecruiterDAO{
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -116,7 +115,6 @@ public class RecruiterDAO implements IRecruiterDAO{
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -283,7 +281,6 @@ public class RecruiterDAO implements IRecruiterDAO{
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}

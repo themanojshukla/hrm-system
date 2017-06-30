@@ -21,8 +21,6 @@ public class AdminDAO implements IAdminDAO {
 
 	@Override
 	public boolean authenticateAdmin() {
-		// System.out.println("Param : " + admin.getEmail() + " " +
-		// admin.getPasswd());
 		String query = "SELECT count(*) as count FROM admin where email = ? and password = ?";
 		boolean returnValue = false;
 		Connection connection = null;
@@ -36,7 +34,6 @@ public class AdminDAO implements IAdminDAO {
 			result = stmt.executeQuery();
 
 			if (result.next()) {
-				System.out.println(result.getInt("count"));
 				if (result.getInt("count") > 0)
 					returnValue = true;
 			}
@@ -49,7 +46,6 @@ public class AdminDAO implements IAdminDAO {
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 
-		System.out.println(returnValue);
 		return returnValue;
 	}
 
@@ -73,12 +69,9 @@ public class AdminDAO implements IAdminDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
+			LOGGER.fatal("Unable to get Admin name : " + email);
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-
-		System.out.println(returnValue);
-
 		return returnValue;
 	}
 
@@ -102,11 +95,9 @@ public class AdminDAO implements IAdminDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.fatal("Unable to authenticate Admin : " + admin.getEmail());
+			LOGGER.fatal("Unable to get Admin name : " + id);
 			LOGGER.error("Exception for " + e.getMessage());
 		}
-
-		System.out.println(returnValue);
 
 		return returnValue;
 	}
@@ -136,5 +127,5 @@ public class AdminDAO implements IAdminDAO {
 		}
 		return returnValue;
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package com.hrsystem.controller.admin;
+package com.hrsystem.controller.hr;
 
 import java.io.IOException;
 
@@ -9,39 +9,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IAdminDAO;
-import com.hrsystem.dao.impl.AdminDAO;
-import com.hrsystem.model.Admin;
+import com.hrsystem.dao.IHRDAO;
+import com.hrsystem.dao.impl.HRDAO;
+import com.hrsystem.model.HR;
 
 /**
- * Servlet implementation class AdminLogin
+ * Servlet implementation class HRLogin
  */
-@WebServlet(name = "AdminLogin", urlPatterns = {"/adminLogin"})
-public class AdminLogin extends HttpServlet {
+@WebServlet(urlPatterns = {"/hrLogin"})
+public class HRLogin extends HttpServlet {
 
 	private static final long serialVersionUID = 5044252826829317401L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/hr");
 	}
 	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
-		Admin admin = new Admin();
-		admin.setEmail(email);
-		admin.setPasswd(passwd);
-		IAdminDAO adminDAO = new AdminDAO(admin);
-		if (adminDAO.authenticateAdmin()) {
+		HR hr = new HR();
+		hr.setEmail(email);
+		hr.setPasswd(passwd);
+		IHRDAO hrDAO = new HRDAO(hr);
+		if (hrDAO.authenticateHR()) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("adminName", adminDAO.getAdminName(email));
-			response.sendRedirect(request.getContextPath() + "/admin");
+			session.setAttribute("hrName", hrDAO.getNameByEmail(email));
+			response.sendRedirect(request.getContextPath() + "/hr");
 		} else {
 			request.setAttribute("errorMessage",
 					"Plz enter valid credentials !!");
-			request.getRequestDispatcher("../admin/index.jsp")
+			request.getRequestDispatcher("/hr/index.jsp")
 					.forward(request, response);
 		}
 	}

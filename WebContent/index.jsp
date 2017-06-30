@@ -9,7 +9,7 @@
 <title>HRM-System</title>
 </head>
 <body style="text-align: center;">
-<h1>Welcom to HRM-System !!</h1><hr>
+<h1>Welcome to HRM-System !!</h1><hr>
 <span style="color: green">
 <c:out value="${errorMessage }"></c:out>
 </span>
