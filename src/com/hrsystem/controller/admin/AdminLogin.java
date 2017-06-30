@@ -42,7 +42,7 @@ public class AdminLogin extends HttpServlet {
 		} else {
 			request.setAttribute("errorMessage",
 					"Plz enter valid credentials !!");
-			request.getRequestDispatcher("admin/index.jsp")
+			request.getRequestDispatcher("../admin/index.jsp")
 					.forward(request, response);
 		}
 	}

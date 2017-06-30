@@ -9,13 +9,13 @@
 		<td style="width: 15%">
 		<span
 			style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/hrList">List of
+				<a href="<%=request.getContextPath()%>/admin/hrList">List of
 					HRs</a>
 		</span> 
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/recList">List of
+				<a href="<%=request.getContextPath()%>/admin/recList">List of
 					Recruiters</a>
 		</span>
 		</td>
@@ -28,7 +28,7 @@
 		<% HR hr= (HR)session.getAttribute("hr"); 
 		
 		%>
-		<form method="POST" action="<%=request.getContextPath() %>/updateHr">
+		<form method="POST" action="<%=request.getContextPath() %>/admin/updateHr">
 		New Name : <input type="text" id="hrname" name="hrname" value="<%=hr.getName() %>" /><br>
 		New Email : <input type="email" id="hremail" name="hremail" value="<%=hr.getEmail() %>" /><br>
 		<input type="hidden" id="hrId" name="hrId"  value="<%=hr.getId() %>" /><br><br>
@@ -42,7 +42,7 @@
 		<td style="width: 45%">
 		<div id="addRec"><span style='color: <c:out value="${color }"  />'><c:out value="${recAddMessage }" /></span>
 		<% session.removeAttribute("recAddMessage"); session.removeAttribute("color");%>
-		<form id="addHr" action="<%=request.getContextPath() %>/addRec" method="POST">
+		<form id="addHr" action="<%=request.getContextPath() %>/admin/addRec" method="POST">
 		
 		Name : <input type="text"  name="recname" /><br>
 		Skills : <input type="text" name="recskills" /><br>

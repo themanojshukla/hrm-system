@@ -16,14 +16,14 @@ import com.hrsystem.model.Recruiter;
 /**
  * Servlet implementation class EditHR
  */
-@WebServlet(name = "editRec", urlPatterns = {"/editRec"})
+@WebServlet(name = "editRec", urlPatterns = {"/admin/editRec"})
 public class EditRecruiter extends HttpServlet {
 	
 	private static final long serialVersionUID = 9159821276713748113L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin/");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -40,11 +40,11 @@ public class EditRecruiter extends HttpServlet {
 					+"<br> Current Email : "+recruiter.getEmail()+
 					"<br> Current Skills : "+recruiter.getSkills()+
 					"<br><br>");
-			response.sendRedirect(request.getContextPath() + "/updateRec");
+			response.sendRedirect(request.getContextPath() + "/admin/updateRec");
 		} else {
 			request.setAttribute("message",
 					"<span style='color: red'>Sorry...! This Recruiter Doesn't exists.</span>");
-			request.getRequestDispatcher("/hrRec").forward(request, response);
+			request.getRequestDispatcher("/admin/hrRec").forward(request, response);
 		}
 	}
 }

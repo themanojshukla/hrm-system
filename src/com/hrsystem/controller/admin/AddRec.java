@@ -15,14 +15,14 @@ import com.hrsystem.model.Recruiter;
 /**
  * Servlet implementation class AddRec
  */
-@WebServlet(name = "addRec", urlPatterns = {"/addRec"})
+@WebServlet(name = "addRec", urlPatterns = {"/admin/addRec"})
 public class AddRec extends HttpServlet {
 
 	private static final long serialVersionUID = 8184451787208501424L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin/");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -37,7 +37,7 @@ public class AddRec extends HttpServlet {
 				|| skills.isEmpty()) {
 			session.setAttribute("color", "red");
 			session.setAttribute("recAddMessage", "Please fill the form.");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		} else {
 			Recruiter recruiter = new Recruiter();
 			recruiter.setEmail(email);
@@ -49,13 +49,13 @@ public class AddRec extends HttpServlet {
 				session.setAttribute("color", "red");
 				session.setAttribute("recAddMessage",
 						"Oops..!! This is an existing Recruiter.");
-				response.sendRedirect(request.getContextPath() + "/admin");
+				response.sendRedirect(request.getContextPath() + "/admin/");
 			} else {
 				recruiterDAO.addNewRecruiter();
 				session.setAttribute("color", "green");
 				session.setAttribute("recAddMessage",
 						"New Recruiter added Successfully.");
-				response.sendRedirect(request.getContextPath() + "/admin");
+				response.sendRedirect(request.getContextPath() + "/admin/");
 			}
 		}
 	}

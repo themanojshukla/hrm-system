@@ -16,9 +16,9 @@
 <br><br><br><br><br><br>
 <table width="100%">
 <tr>
-<th><a href="<%=request.getContextPath() %>/admin">Admin Login</a></th>
-<th><a href="<%=request.getContextPath() %>/hr">HR Login</a></th>
-<th><a href="<%=request.getContextPath() %>/recruiter">Recruiter Login</a></th>
+<th><a href="<%=request.getContextPath() %>/admin/">Admin Login</a></th>
+<th><a href="<%=request.getContextPath() %>/hr/">HR Login</a></th>
+<th><a href="<%=request.getContextPath() %>/recruiter/">Recruiter Login</a></th>
 </tr>
 </table>
 </body>

@@ -18,9 +18,7 @@ import org.apache.log4j.Logger;
 /**
  * Servlet Filter implementation class AdminAuthenticationFilter
  */
-@WebFilter(servletNames = {"admin"}, urlPatterns = {"/admin", "/addHr",
-		"/hrList", "/deleteHr", "/editHr", "/updateHr", "/addRec", "/recList", "/editRec",
-		"/updateRec" ,"/deleteRec"})
+@WebFilter(urlPatterns = { "/admin/*"})
 public class AdminAuthenticationFilter implements Filter {
 
 	final static Logger LOGGER = Logger
@@ -45,8 +43,8 @@ public class AdminAuthenticationFilter implements Filter {
 			if (session.getAttribute("adminName") == null) {
 				session.invalidate();
 				request.setAttribute("errorMessage", "Please Login First.");
-				req.getRequestDispatcher("admin/index.jsp").forward(request,
-						response);
+				System.out.println(req.getContextPath()+"1");
+				req.getRequestDispatcher("/admin/index.jsp").forward(req, res);
 			} else {
 				System.out.println("Session not null, fwd to admin Name : "
 						+ session.getAttribute("adminName"));
@@ -58,8 +56,7 @@ public class AdminAuthenticationFilter implements Filter {
 			}
 		} else if (session == null) {
 			request.setAttribute("errorMessage", "Please Login First.");
-			req.getRequestDispatcher("admin/index.jsp").forward(request,
-					response);
+			req.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 	}
 }

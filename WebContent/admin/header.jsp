@@ -11,7 +11,7 @@
 </head>
 <c:if test="${adminName == null }">
 <%
-response.sendRedirect(request.getContextPath()+"/admin");
+response.sendRedirect(request.getContextPath()+"/admin/");
 %>
 </c:if>
 
