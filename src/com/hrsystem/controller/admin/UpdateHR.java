@@ -16,7 +16,7 @@ import com.hrsystem.model.HR;
 /**
  * Servlet implementation class UpdateHR
  */
-@WebServlet(name = "updateHr", urlPatterns = {"/updateHr"})
+@WebServlet(name = "updateHr", urlPatterns = {"/admin/updateHr"})
 public class UpdateHR extends HttpServlet {
 
 	private static final long serialVersionUID = 8443032717178129087L;
@@ -25,9 +25,9 @@ public class UpdateHR extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("hr") == null) {
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		} else {
-			request.getRequestDispatcher("admin/editHr.jsp").forward(request,
+			request.getRequestDispatcher("../admin/editHr.jsp").forward(request,
 					response);
 		}
 
@@ -52,20 +52,20 @@ public class UpdateHR extends HttpServlet {
 				session.setAttribute("color", "red");
 				session.setAttribute("hrAddMessage",
 						"Sorry, This email id already exists for some other HR. !");
-			response.sendRedirect(request.getContextPath() + "/admin");	
+			response.sendRedirect(request.getContextPath() + "/admin/");	
 			}
 			else{
 			hrDAO.updateHr();
 			session.setAttribute("color", "green");
 			session.setAttribute("hrAddMessage", "HR Updated Successfully !");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 			}
 			
 		} else {
 			session.setAttribute("color", "red");
 			session.setAttribute("addHrMessage",
 					"Sorry, This HR doesn't exists. !");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		}
 
 	}

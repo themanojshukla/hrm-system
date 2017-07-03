@@ -16,7 +16,7 @@ import com.hrsystem.model.HR;
 /**
  * Servlet implementation class ListAllHr
  */
-@WebServlet(name = "hrList", urlPatterns = { "/hrList" })
+@WebServlet(name = "hrList", urlPatterns = { "/admin/hrList" })
 public class ListAllHr extends HttpServlet {
 
 	private static final long serialVersionUID = 3225883686425658366L;
@@ -25,6 +25,6 @@ public class ListAllHr extends HttpServlet {
 		IHRDAO hrDAO = new HRDAO();
 		List<HR> hrList = hrDAO.getHRList();
 		request.setAttribute("hrList", hrList);
-		request.getRequestDispatcher("admin/hrList.jsp").forward(request, response);
+		request.getRequestDispatcher("../admin/hrList.jsp").forward(request, response);
 	}
 }

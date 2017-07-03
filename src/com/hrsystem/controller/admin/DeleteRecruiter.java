@@ -14,14 +14,14 @@ import com.hrsystem.dao.impl.RecruiterDAO;
 /**
  * Servlet implementation class DeleteHR
  */
-@WebServlet(name = "deleteRec", urlPatterns = {"/deleteRec"})
+@WebServlet(name = "deleteRec", urlPatterns = {"/admin/deleteRec"})
 public class DeleteRecruiter extends HttpServlet {
 
 	private static final long serialVersionUID = -5719510353888797880L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin/");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -31,9 +31,9 @@ public class DeleteRecruiter extends HttpServlet {
 		IRecruiterDAO recruiterDAO = new RecruiterDAO();
 		if (recruiterDAO.isExistingById(Integer.parseInt(recId))) {
 			recruiterDAO.removeExistingById(Integer.parseInt(recId));
-			response.sendRedirect(request.getContextPath()+"/recList");
+			response.sendRedirect(request.getContextPath()+"/admin/recList");
 		} else {
-			response.sendRedirect(request.getContextPath()+"/admin");
+			response.sendRedirect(request.getContextPath()+"/admin/");
 		}
 	}
 

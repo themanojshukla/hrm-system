@@ -16,14 +16,14 @@ import com.hrsystem.model.HR;
 /**
  * Servlet implementation class EditHR
  */
-@WebServlet(name = "editHr", urlPatterns = {"/editHr"})
+@WebServlet(name = "editHr", urlPatterns = {"/admin/editHr"})
 public class EditHR extends HttpServlet {
 	
 	private static final long serialVersionUID = -3696567214067992719L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin/");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -38,11 +38,11 @@ public class EditHR extends HttpServlet {
 			session.setAttribute("color", "blue");
 			session.setAttribute("editHrMessage", "Current Name : "+hr.getName()
 					+"<br> Current Email : "+hr.getEmail()+"<br><br>");
-			response.sendRedirect(request.getContextPath() + "/updateHr");
+			response.sendRedirect(request.getContextPath() + "/admin/updateHr");
 		} else {
 			request.setAttribute("message",
 					"<span style='color: red'>Sorry...! This HR Doesn't exists.</span>");
-			request.getRequestDispatcher("/hrList").forward(request, response);
+			request.getRequestDispatcher("/admin/hrList").forward(request, response);
 		}
 	}
 }

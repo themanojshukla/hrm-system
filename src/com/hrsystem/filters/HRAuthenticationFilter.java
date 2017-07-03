@@ -18,30 +18,30 @@ import org.apache.log4j.Logger;
 /**
  * Servlet Filter implementation class AdminAuthenticationFilter
  */
-@WebFilter(urlPatterns = { "/admin/*"})
-public class AdminAuthenticationFilter implements Filter {
+@WebFilter(urlPatterns = {"/hr/*"})
+public class HRAuthenticationFilter implements Filter {
 
-	final static Logger LOGGER = Logger
-			.getLogger(AdminAuthenticationFilter.class);
+	final static Logger LOGGER = Logger.getLogger(HRAuthenticationFilter.class);
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		LOGGER.info("Filter for Admin Authentication Initialized.");
+		LOGGER.info("Filter for HR Authentication Initialized.");
 	}
 
 	public void destroy() {
-		LOGGER.info("Filter for Admin Authentication Destroyed.");
+		LOGGER.info("Filter for HR Authentication Destroyed.");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
-		FilterChain chain) throws IOException, ServletException {
+			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession(false);
 		HttpServletResponse res = (HttpServletResponse) response;
 		if (session != null) {
-			if (session.getAttribute("adminName") == null) {
+			
+			if (session.getAttribute("hrName") == null) {
 				session.invalidate();
 				request.setAttribute("errorMessage", "Please Login First.");
-				req.getRequestDispatcher("/admin/index.jsp").forward(req, res);
+				req.getRequestDispatcher("/hr/index.jsp").forward(req, res);
 			} else {
 				res.setHeader("Cache-Control",
 						"no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -49,6 +49,7 @@ public class AdminAuthenticationFilter implements Filter {
 				res.setDateHeader("Expires", 0);
 				chain.doFilter(request, response);
 			}
+			
 		} else if (session == null) {
 			request.setAttribute("errorMessage", "Please Login First.");
 			req.getRequestDispatcher("/index.jsp").forward(request, response);

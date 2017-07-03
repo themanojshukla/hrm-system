@@ -16,14 +16,14 @@ import com.hrsystem.model.HR;
 /**
  * Servlet implementation class AddHR
  */
-@WebServlet(name = "addHr", urlPatterns = {"/addHr"})
+@WebServlet(name = "addHr", urlPatterns = {"/admin/addHr"})
 public class AddHR extends HttpServlet {
 
 	private static final long serialVersionUID = -2087574126061302133L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin/");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -36,7 +36,7 @@ public class AddHR extends HttpServlet {
 				|| email.isEmpty() || passwd.isEmpty()) {
 			session.setAttribute("color", "red");
 			session.setAttribute("hrAddMessage","Please fill the form.");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		} else {
 			HR hr = new HR();
 			hr.setEmail(email);
@@ -46,12 +46,12 @@ public class AddHR extends HttpServlet {
 			if (hrDAO.isExisting()) {
 				session.setAttribute("color", "red");
 				session.setAttribute("hrAddMessage","Oops..!! This is an existing HR.");
-				response.sendRedirect(request.getContextPath() + "/admin");
+				response.sendRedirect(request.getContextPath() + "/admin/");
 			} else {
 				hrDAO.addNewHR();
 				session.setAttribute("color", "green");
 				session.setAttribute("hrAddMessage","New HR added Successfully.");
-				response.sendRedirect(request.getContextPath() + "/admin");
+				response.sendRedirect(request.getContextPath() + "/admin/");
 			}
 		}
 	}

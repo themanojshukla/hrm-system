@@ -16,7 +16,7 @@ import com.hrsystem.model.Recruiter;
 /**
  * Servlet implementation class UpdateHR
  */
-@WebServlet(name = "updateRec", urlPatterns = {"/updateRec"})
+@WebServlet(name = "updateRec", urlPatterns = {"/admin/updateRec"})
 public class UpdateRecruiter extends HttpServlet {
 
 	private static final long serialVersionUID = 8443032717178129087L;
@@ -25,9 +25,9 @@ public class UpdateRecruiter extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("recruiter") == null) {
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		} else {
-			request.getRequestDispatcher("admin/editRec.jsp").forward(request,
+			request.getRequestDispatcher("../admin/editRec.jsp").forward(request,
 					response);
 		}
 
@@ -56,7 +56,7 @@ public class UpdateRecruiter extends HttpServlet {
 				session.setAttribute("color", "red");
 				session.setAttribute("recAddMessage",
 						"Sorry, This email id already exists for some other Recruiter. !");
-			response.sendRedirect(request.getContextPath() + "/admin");	
+			response.sendRedirect(request.getContextPath() + "/admin/");	
 			}
 			else{
 			recruiterDAO.updateRecruiter();
@@ -64,7 +64,7 @@ public class UpdateRecruiter extends HttpServlet {
 			session.removeAttribute("editRecMessage");
 			session.setAttribute("color", "green");
 			session.setAttribute("recAddMessage", "Recruiter Updated Successfully !");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 			}
 			
 		} else {
@@ -73,7 +73,7 @@ public class UpdateRecruiter extends HttpServlet {
 			session.setAttribute("color", "red");
 			session.setAttribute("addHrMessage",
 					"Sorry, This HR doesn't exists. !");
-			response.sendRedirect(request.getContextPath() + "/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/");
 		}
 
 	}

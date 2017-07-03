@@ -7,16 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin | HRM-System</title>
+<title>HRd | HRM-System</title>
 </head>
-<c:if test="${adminName == null }">
+<c:if test="${hrName == null }">
 <%
-response.sendRedirect(request.getContextPath()+"/admin/");
+response.sendRedirect(request.getContextPath()+"/hr/");
 %>
 </c:if>
 
 <body style="text-align: center;">
-	<H2>Welcome to Admin Portal :: You are Logged in as <c:out value="${adminName }" /> &nbsp;&nbsp;&nbsp; 
-	<a href="<%=request.getContextPath() %>/adminLogout" >LOGOUT </a>
+	<H2>Welcome to HR Portal :: You are Logged in as <c:out value="${hrName }" /> &nbsp;&nbsp;&nbsp; 
+	<a href="<%=request.getContextPath() %>/hrLogout" >LOGOUT </a>
 	</H2>
 	<hr />

@@ -16,7 +16,7 @@ import com.hrsystem.model.Recruiter;
 /**
  * Servlet implementation class ListAllRec
  */
-@WebServlet(name = "recList", urlPatterns = { "/recList" })
+@WebServlet(name = "recList", urlPatterns = { "/admin/recList" })
 public class ListAllRecruiter extends HttpServlet {
 
 	private static final long serialVersionUID = 3225883686425658366L;
@@ -26,6 +26,6 @@ public class ListAllRecruiter extends HttpServlet {
 		IRecruiterDAO recDAO = new RecruiterDAO();
 		List<Recruiter> recList = recDAO.getRecruiterList();
 		request.setAttribute("recList", recList);
-		request.getRequestDispatcher("admin/recList.jsp").forward(request, response);
+		request.getRequestDispatcher("../admin/recList.jsp").forward(request, response);
 	}
 }
