@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IHRDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IHrDao;
+import com.hrsystem.dao.factory.DaoFactory;
 import com.hrsystem.model.HR;
 
 /**
@@ -46,7 +46,7 @@ public class UpdateHR extends HttpServlet {
 		hr.setEmail(hrEmail);
 		hr.setName(hrName);
 		session.removeAttribute("editHrMessage");
-		IHRDAO hrDAO = DAOFactory.getDAO(hr);
+		IHrDao hrDAO = DaoFactory.getHrDao();
 		if (hrDAO.isExistingById(hr.getId())) {
 			if(hrDAO.isOtherExistingByEmail(hrEmail,id)){
 				session.setAttribute("color", "red");
@@ -55,7 +55,7 @@ public class UpdateHR extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/admin/");	
 			}
 			else{
-			hrDAO.updateHr();
+			hrDAO.updateHr(hr);
 			session.setAttribute("color", "green");
 			session.setAttribute("hrAddMessage", "HR Updated Successfully !");
 			response.sendRedirect(request.getContextPath() + "/admin/");

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hrsystem.dao.IHRDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IHrDao;
+import com.hrsystem.dao.factory.DaoFactory;
 
 /**
  * Servlet implementation class DeleteHR
@@ -27,9 +27,9 @@ public class DeleteHR extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String hrId = request.getParameter("hrId");
-		IHRDAO hrDAO = DAOFactory.getHRDAO();
-		if (hrDAO.isExistingById(Integer.parseInt(hrId))) {
-			hrDAO.removeExistingById(Integer.parseInt(hrId));
+		IHrDao hrDao = DaoFactory.getHrDao();
+		if (hrDao.isExistingById(Integer.parseInt(hrId))) {
+			hrDao.removeExistingById(Integer.parseInt(hrId));
 			request.setAttribute("deleteMessage", "<span style='color: green'>HR Deleted Successfully.</span>");
 			response.sendRedirect(request.getContextPath()+"/admin/hrList");
 		} else {

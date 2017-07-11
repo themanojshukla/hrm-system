@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hrsystem.dao.IRecruiterDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IRecruiterDao;
+import com.hrsystem.dao.factory.DaoFactory;
 
 /**
  * Servlet implementation class DeleteHR
@@ -28,9 +28,9 @@ public class DeleteRecruiter extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		String recId = request.getParameter("recId");
-		IRecruiterDAO recruiterDAO = DAOFactory.getRecruiterDAO();
-		if (recruiterDAO.isExistingById(Integer.parseInt(recId))) {
-			recruiterDAO.removeExistingById(Integer.parseInt(recId));
+		IRecruiterDao recruiterDao = DaoFactory.getRecruiterDao();
+		if (recruiterDao.isExistingById(Integer.parseInt(recId))) {
+			recruiterDao.removeExistingById(Integer.parseInt(recId));
 			response.sendRedirect(request.getContextPath()+"/admin/recList");
 		} else {
 			response.sendRedirect(request.getContextPath()+"/admin/");

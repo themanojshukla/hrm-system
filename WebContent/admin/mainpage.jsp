@@ -9,13 +9,13 @@
 		<td style="width: 15%">
 		<span
 			style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/hrList">List of
+				<a href="<%=request.getContextPath()%>/hrs">List of
 					HRs</a>
 		</span> 
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/recList">List of
+				<a href="<%=request.getContextPath()%>/recruiters">List of
 					Recruiters</a>
 		</span>
 		</td>
@@ -23,7 +23,8 @@
 		<td style="width: 40%">
 		<span style='color: <c:out value="${color }"  />'><c:out value="${hrAddMessage }" /></span>
 		<% session.removeAttribute("hrAddMessage"); %>
-		<form id="addHr" action="<%=request.getContextPath() %>/admin/addHr" method="POST">
+		<form id="addHr" action="<%=request.getContextPath() %>/hrs" method="POST">
+		<input type="hidden" name="_METHOD" value="PUT"/>
 		Name : <input type="text" id="hrname" name="hrname" /><br>
 		Email : <input type="email" id="hremail" name="hremail" /><br>
 		Password : <input type="password" id="hrpasswd" name="hrpasswd" /><br><br>
@@ -34,7 +35,7 @@
 		<td style="width: 45%">
 		<span style='color: <c:out value="${color }"  />'><c:out value="${recAddMessage }" /></span>
 		<% session.removeAttribute("recAddMessage"); session.removeAttribute("color");%>
-		<form id="addHr" action="<%=request.getContextPath() %>/admin/addRec" method="POST">
+		<form id="addHr" action="<%=request.getContextPath() %>/rescruiters" method="POST">
 		
 		Name : <input type="text"  name="recname" /><br>
 		Skills : <input type="text" name="recskills" /><br>

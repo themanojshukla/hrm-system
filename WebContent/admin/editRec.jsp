@@ -10,13 +10,13 @@
 		<td style="width: 15%">
 		<span
 			style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/hrList">List of
+				<a href="<%=request.getContextPath()%>/admin/hrs">List of
 					HRs</a>
 		</span> 
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/recList">List of
+				<a href="<%=request.getContextPath()%>/admin/recruiters">List of
 					Recruiters</a>
 		</span>
 		</td>
@@ -24,7 +24,7 @@
 		<td style="width: 40%">
 		<span style='color: <c:out value="${color }"  />'><c:out value="${hrAddMessage }" /></span>
 		<% session.removeAttribute("hrAddMessage"); %>
-		<form id="addHr" action="<%=request.getContextPath() %>/admin/addHr" method="POST">
+		<form id="addHr" action="<%=request.getContextPath() %>/admin/hrs" method="POST">
 		Name : <input type="text" id="hrname" name="hrname" /><br>
 		Email : <input type="email" id="hremail" name="hremail" /><br>
 		Password : <input type="password" id="hrpasswd" name="hrpasswd" /><br><br>

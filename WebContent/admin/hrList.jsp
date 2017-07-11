@@ -8,7 +8,7 @@
 				<a href="<%=request.getContextPath()%>/admin">Add New Recruiter</a>
 		</span></td>
 		<td style="width: 40%; text-align: center;"> <span style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/recList">List of Recruiters</a>
+				<a href="<%=request.getContextPath()%>/recruiters">List of Recruiters</a>
 		</span></td>
 		</tr>
 </table>

@@ -10,7 +10,7 @@
 </head>
 <body style="text-align: center;">
 <h1>Welcome to HRM-System !!</h1><hr>
-<span style="color: green">
+<span style="color: blue">
 <c:out value="${errorMessage }"></c:out>
 </span>
 <br><br><br><br><br><br>
@@ -18,7 +18,7 @@
 <tr>
 <th><a href="<%=request.getContextPath() %>/admin/">Admin Login</a></th>
 <th><a href="<%=request.getContextPath() %>/hr/">HR Login</a></th>
-<th><a href="<%=request.getContextPath() %>/recruiter/">Recruiter Login</a></th>
+<th><a href="<%=request.getContextPath() %>/rec/">Recruiter Login</a></th>
 </tr>
 </table>
 </body>

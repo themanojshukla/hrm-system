@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Servlet Filter implementation class AdminAuthenticationFilter
+ * Servlet Filter implementation class HRAuthenticationFilter
  */
 @WebFilter(urlPatterns = {"/hr/*"})
 public class HRAuthenticationFilter implements Filter {

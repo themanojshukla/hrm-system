@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IRecruiterDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IRecruiterDao;
+import com.hrsystem.dao.factory.DaoFactory;
 import com.hrsystem.model.Recruiter;
 
 /**
@@ -30,9 +30,9 @@ public class EditRecruiter extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String recId = request.getParameter("recId");
 		int id = Integer.parseInt(recId);
-		IRecruiterDAO recuiterDAO = DAOFactory.getRecruiterDAO();
-		if (recuiterDAO.isExistingById(id)) {
-			Recruiter recruiter = recuiterDAO.getRecruiterById(id);
+		IRecruiterDao recuiterDao = DaoFactory.getRecruiterDao();
+		if (recuiterDao.isExistingById(id)) {
+			Recruiter recruiter = recuiterDao.getRecruiterById(id);
 			HttpSession session = request.getSession(false);
 			session.setAttribute("recruiter",recruiter);
 			session.setAttribute("color", "blue");

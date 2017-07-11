@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IRecruiterDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IRecruiterDao;
+import com.hrsystem.dao.factory.DaoFactory;
 import com.hrsystem.model.Recruiter;
 
 /**
@@ -45,14 +45,14 @@ public class AddRec extends HttpServlet {
 			recruiter.setName(name);
 			recruiter.setPasswd(passwd);
 			recruiter.setSkills(skills);
-			IRecruiterDAO recruiterDAO = DAOFactory.getDAO(recruiter);
-			if (recruiterDAO.isExistingByEmail(email)) {
+			IRecruiterDao recruiterDao = DaoFactory.getRecruiterDao();
+			if (recruiterDao.isExistingByEmail(email)) {
 				session.setAttribute("color", "red");
 				session.setAttribute("recAddMessage",
 						"Oops..!! This is an existing Recruiter.");
 				response.sendRedirect(request.getContextPath() + "/admin/");
 			} else {
-				recruiterDAO.addNewRecruiter();
+				recruiterDao.addNewRecruiter(recruiter);
 				session.setAttribute("color", "green");
 				session.setAttribute("recAddMessage",
 						"New Recruiter added Successfully.");

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IHRDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IHrDao;
+import com.hrsystem.dao.factory.DaoFactory;
 import com.hrsystem.model.HR;
 
 /**
@@ -30,9 +30,9 @@ public class EditHR extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String hrId = request.getParameter("hrId");
 		int id = Integer.parseInt(hrId);
-		IHRDAO hrDAO = DAOFactory.getHRDAO();
-		if (hrDAO.isExistingById(id)) {
-			HR hr = hrDAO.getHRById(Integer.parseInt(hrId));
+		IHrDao hrDao = DaoFactory.getHrDao();
+		if (hrDao.isExistingById(id)) {
+			HR hr = hrDao.getHRById(Integer.parseInt(hrId));
 			HttpSession session = request.getSession(false);
 			session.setAttribute("hr",hr);
 			session.setAttribute("color", "blue");

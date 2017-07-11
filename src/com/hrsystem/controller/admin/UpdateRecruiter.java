@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hrsystem.dao.IRecruiterDAO;
-import com.hrsystem.dao.factory.DAOFactory;
+import com.hrsystem.dao.IRecruiterDao;
+import com.hrsystem.dao.factory.DaoFactory;
 import com.hrsystem.model.Recruiter;
 
 /**
@@ -48,9 +48,9 @@ public class UpdateRecruiter extends HttpServlet {
 		recruiter.setName(recName);
 		recruiter.setSkills(recSkills);
 		session.setAttribute("recruiter", recruiter);
-		IRecruiterDAO recruiterDAO = DAOFactory.getDAO(recruiter);
-		if (recruiterDAO.isExistingById(recruiter.getId())) {
-			if(recruiterDAO.isOtherExistingByEmail(recEmail,id)){
+		IRecruiterDao recruiterDao = DaoFactory.getRecruiterDao();
+		if (recruiterDao.isExistingById(recruiter.getId())) {
+			if(recruiterDao.isOtherExistingByEmail(recEmail,id)){
 				session.removeAttribute("recruiter");
 				session.removeAttribute("editRecruiterMessage");
 				session.setAttribute("color", "red");
@@ -59,7 +59,7 @@ public class UpdateRecruiter extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/admin/");	
 			}
 			else{
-			recruiterDAO.updateRecruiter();
+			recruiterDao.updateRecruiter(recruiter);
 			session.removeAttribute("recruiter");
 			session.removeAttribute("editRecMessage");
 			session.setAttribute("color", "green");
