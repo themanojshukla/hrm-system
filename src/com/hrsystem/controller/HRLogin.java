@@ -10,43 +10,50 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hrsystem.dao.IHrDao;
-import com.hrsystem.dao.factory.DaoFactory;
-import com.hrsystem.model.HR;
+import com.hrsystem.init.DaoFactory;
 
 /**
  * Servlet implementation class HRLogin
  */
-@WebServlet(urlPatterns = {"/hrLogin"})
+@WebServlet(urlPatterns = { "/hrLogin" })
 public class HRLogin extends HttpServlet {
 
-	private static final long serialVersionUID = 5044252826829317401L;
+    private static final long serialVersionUID = 5044252826829317401L;
+    
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	response.sendRedirect(request.getContextPath() + "/hr");
+    }
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	
+	HttpSession session = request.getSession(false);
+	if (session != null && session.getAttribute("hrName") == null) {
+
+	    String email = request.getParameter("email");
+	    String passwd = request.getParameter("passwd");
+	   
+	    IHrDao hrDAO = DaoFactory.getHrDao();
+	    if (hrDAO.authenticateHR(email, passwd)) {
+		session = request.getSession(true);
+		session.setAttribute("hrName", hrDAO.getNameByEmail(email));
+		session.setAttribute("hrID", hrDAO.getIdByEmail(email));
 		response.sendRedirect(request.getContextPath() + "/hr");
+	    } else {
+		request.setAttribute("errorMessage", "Plz enter valid credentials !!");
+		request.getRequestDispatcher("/hr/index.jsp").forward(request, response);
+	    }
+	} else {
+	    response.sendRedirect(request.getContextPath() + "/hr");
 	}
-
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("hrName") == null) {
-
-			String email = request.getParameter("email");
-			String passwd = request.getParameter("passwd");
-			IHrDao hrDAO = DaoFactory.getHrDao();
-			if (hrDAO.authenticateHR(email, passwd)) {
-				session = request.getSession(true);
-				session.setAttribute("hrName", hrDAO.getNameByEmail(email));
-				session.setAttribute("hrID", hrDAO.getIdByEmail(email));
-				response.sendRedirect(request.getContextPath() + "/hr");
-			} else {
-				request.setAttribute("errorMessage",
-						"Plz enter valid credentials !!");
-				request.getRequestDispatcher("/hr/index.jsp").forward(request,
-						response);
-			}
-		} else {
-			response.sendRedirect(request.getContextPath() + "/hr");
-		}
-	}
+    }
 }

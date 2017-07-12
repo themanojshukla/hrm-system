@@ -41,7 +41,11 @@
 		href="<%=request.getContextPath()%>/hr/candidates/<%=candidate.getId()%>">View Profile</a></td>
 		<% String status = candidate.getStatus();
 		if(status.equals("INTERVIEW")){
-		out.print("<th>Pending</th>");
+		out.print("<th>Status : Pending <br><hr>"
+				+"Date : " + candidate.getInterview().getDate()+"<br>"+
+				"Time : " + candidate.getInterview().getTime()+"<br>"+
+				"Place : " + candidate.getInterview().getPlace()+"<br>"
+		+"</th>");
 		out.print("<td>NONE</td>");
 		}
 		else if(status.equals("intPassed")){
@@ -50,6 +54,7 @@
 			<td><form action='<%=request.getContextPath() %>/hr/assignRecruiter' method='POST'>
 		<input type='hidden' name='status' value='FINAL' />
 		<input type='hidden' name='candidateId' value='<%=candidate.getId()%>' >
+	
     <input type='submit' value='Appoint for HR-Round'>
     </form></td>
 			<%

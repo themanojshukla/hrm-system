@@ -14,24 +14,26 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AdminLogout", urlPatterns = { "/adminLogout" })
 public class AdminLogout extends HttpServlet {
+
+    private static final long serialVersionUID = -4442097404210954543L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	doPost(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+
+	HttpSession session = request.getSession(false);
 	
-	private static final long serialVersionUID = -4442097404210954543L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+	if (session == null) {
+	    response.sendRedirect(request.getContextPath() + "/");
+	} 
+	else {
+	    session.removeAttribute("adminName");
+	    session.invalidate();
+	    response.sendRedirect(request.getContextPath());
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if(session == null){
-			response.sendRedirect(request.getContextPath()+"/");
-		}
-		else{
-			session.removeAttribute("adminName");
-			session.invalidate();
-			response.sendRedirect(request.getContextPath());
-/*			request.setAttribute("errorMessage", "Admin Logged Out !!");
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-*/		}
-	}
+    }
 }

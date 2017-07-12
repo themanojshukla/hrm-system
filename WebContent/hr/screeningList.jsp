@@ -9,6 +9,7 @@
 		</tr>
 </table>
 <hr>
+<c:if test="${screeningList != null}">
 <table border="1"
 	style="width: 100%; border-top: none; border-bottom: none; border: medium;">
 	<tr>
@@ -46,11 +47,17 @@
 			<td><form action='<%=request.getContextPath() %>/hr/assignRecruiter' method='POST'>
 		<input type='hidden' name='status' value='INTERVIEW' />
 		<input type='hidden' name='candidateId' value='<%=candidate.getId()%>' >
-		<select name='recruiterId'>
+		Select Interviewer : <select name='recruiterId'>
 		<% for(Recruiter recruiter: recruiterList){ %>
     <option value='<%=recruiter.getId() %>'><%=recruiter.getName() %> -- <%=recruiter.getSkills() %> </option>
     <%} %>
-    </select>
+    </select><br>
+    Time : <input type="text" name="time"  />
+			<br>
+			Date : <input type="text" name="date"  />
+			<br>
+			Place : <input type="text" name="place"  />
+				
     <input type='submit' value='ASSIGN '>
     </form></td>
 			<%
@@ -85,4 +92,8 @@
 			}
 		%>
 </table>
+</c:if>
+<c:if test="${screeningList == null}">
+<h3 style="color: red">NO SCREENING CANDIDATES FOUND</h3>
+</c:if>
 <%@include file="footer.jsp"%>

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.COUNT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -133,6 +132,29 @@ public class InterviewDao implements IInterviewDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOGGER.error("Unable to Update Candidate for : " + status + " ID : " + candidateId );
+			LOGGER.error("Exception for " + e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public void selectThisCandidate(String id, int hrId) {
+		String query = "UPDATE interview SET status = ? where candidate_id =? AND hr_id = ?";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = DBConnection.getConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, "SELECTED");
+			stmt.setString(2, id);
+			stmt.setInt(3, hrId);
+			System.out.println("SELECECT : "+id+" "+hrId);
+			stmt.executeUpdate();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("Unable to Update as Selected Candidate " +id );
 			LOGGER.error("Exception for " + e.getMessage());
 		}
 		

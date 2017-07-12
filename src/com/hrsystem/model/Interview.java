@@ -5,6 +5,7 @@ public class Interview {
 	private String time;
 	private String date;
 	private HR hr;
+	private String place;
 	private Recruiter recruiter;
 	private Candidate candidate;
 	public int getId() {
@@ -42,6 +43,12 @@ public class Interview {
 	}
 	public void setCandidate(Candidate candidate) {
 		this.candidate = candidate;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	
 	

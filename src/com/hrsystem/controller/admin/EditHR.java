@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hrsystem.dao.IHrDao;
-import com.hrsystem.dao.factory.DaoFactory;
+import com.hrsystem.init.DaoFactory;
 import com.hrsystem.model.HR;
 
 /**

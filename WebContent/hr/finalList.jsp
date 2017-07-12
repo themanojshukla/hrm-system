@@ -49,7 +49,7 @@
 			HRA : <input type="text" name="hra" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46 || event.charCode == 0' />
 			<br>
 			DA : <input type="text" name="da" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46 || event.charCode == 0' />
-				<input type="hidden" name="candidateID" value="<%=candidate.getId()%>)" />
+				<input type="hidden" name="candidateId" value="<%=candidate.getId()%>" />
 			
 			<br>
 			<input type="submit" value="ADD CTC"/> 

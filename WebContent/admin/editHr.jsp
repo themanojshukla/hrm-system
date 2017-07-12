@@ -9,13 +9,13 @@
 		<td style="width: 15%">
 		<span
 			style="font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/hrs">List of
+				<a href="<%=request.getContextPath()%>/hrs">List of
 					HRs</a>
 		</span> 
 		<br><br><br>
 		 <span
 			style=" font-size: x-large;">
-				<a href="<%=request.getContextPath()%>/admin/recruiters">List of
+				<a href="<%=request.getContextPath()%>/recruiters">List of
 					Recruiters</a>
 		</span>
 		</td>

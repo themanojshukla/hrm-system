@@ -9,6 +9,7 @@
 		</tr>
 </table>
 <hr>
+<c:if test="${ctcList != null}">
 <table border="1"
 	style="width: 100%; border-top: none; border-bottom: none; border: medium;">
 	<tr>
@@ -46,4 +47,8 @@
 		  }
 		%>
 </table>
+</c:if>
+<c:if test="${ctcList == null}">
+<h3 style="color: red">NO SUCH CANDIDATE FOUND</h3>
+</c:if>
 <%@include file="footer.jsp"%>

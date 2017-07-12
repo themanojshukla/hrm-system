@@ -18,8 +18,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Servlet Filter implementation class AdminAuthenticationFilter
+ * 
  */
-@WebFilter(urlPatterns = { "/admin/*"})
+@WebFilter(urlPatterns = { "/admin/*" , "/hrs/*" ,"/recruiters/*"})
 public class AdminAuthenticationFilter implements Filter {
 
 	final static Logger LOGGER = LoggerFactory.getLogger(AdminAuthenticationFilter.class);
@@ -31,7 +32,8 @@ public class AdminAuthenticationFilter implements Filter {
 	public void destroy() {
 		LOGGER.info("Filter for Admin Authentication Destroyed.");
 	}
-
+	
+	
 	public void doFilter(ServletRequest request, ServletResponse response,
 		FilterChain chain) throws IOException, ServletException {
 		
@@ -41,20 +43,23 @@ public class AdminAuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		HttpServletResponse res = (HttpServletResponse) response;
 		if (session != null) {
-			if (session.getAttribute("adminName") == null) {
+			if (session.getAttribute("adminName") == null) { //if admin user is not logged in
 				session.invalidate();
 				request.setAttribute("errorMessage", "Please Login First.");
 				req.getRequestDispatcher("/admin/index.jsp").forward(req, res);
+				LOGGER.info("Forwarded to admin login page.");
 			} else {
 				res.setHeader("Cache-Control",
 						"no-cache, no-store, must-revalidate"); // HTTP 1.1.
 				res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 				res.setDateHeader("Expires", 0);
 				chain.doFilter(request, response);
+				LOGGER.info("Forwarded to admin controller");
 			}
 		} else if (session == null) {
 			request.setAttribute("errorMessage", "Please Login First.");
 			req.getRequestDispatcher("/index.jsp").forward(request, response);
+			LOGGER.info("Forwarded to index page.");
 		}
 		
 		LOGGER.info("Admin.doFilter() finished.");

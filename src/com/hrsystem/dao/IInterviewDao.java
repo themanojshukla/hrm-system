@@ -12,4 +12,6 @@ public interface IInterviewDao {
 
 	void assignHR(String status, String candidateId, String hrId);
 
+	void selectThisCandidate(String id, int hrId);
+
 }

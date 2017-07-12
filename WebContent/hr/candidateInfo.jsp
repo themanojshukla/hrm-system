@@ -8,6 +8,7 @@
 		<td></td>
 		</tr>
 </table>
+<c:if test="${candidateInfo != null }">
 <table border="1" style="width: 100%">
 <%
 Candidate candidate = (Candidate)request.getAttribute("candidateInfo");
@@ -41,4 +42,9 @@ Address : <%=candidate.getAddress() %><br><br>
 </td>
 </tr>
 </table>
+</c:if>
+<c:if test="${candidateInfo == null }">
+
+<h3 style="color: red">NO SUCH CANDIDATE FOUND</h3>
+</c:if>
 <%@include file="footer.jsp"%>

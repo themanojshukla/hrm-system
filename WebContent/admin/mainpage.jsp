@@ -35,7 +35,7 @@
 		<td style="width: 45%">
 		<span style='color: <c:out value="${color }"  />'><c:out value="${recAddMessage }" /></span>
 		<% session.removeAttribute("recAddMessage"); session.removeAttribute("color");%>
-		<form id="addHr" action="<%=request.getContextPath() %>/rescruiters" method="POST">
+		<form id="addHr" action="<%=request.getContextPath() %>/recruiters" method="POST">
 		
 		Name : <input type="text"  name="recname" /><br>
 		Skills : <input type="text" name="recskills" /><br>

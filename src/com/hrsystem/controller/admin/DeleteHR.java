@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hrsystem.dao.IHrDao;
-import com.hrsystem.dao.factory.DaoFactory;
+import com.hrsystem.init.DaoFactory;
 
 /**
  * Servlet implementation class DeleteHR
@@ -31,10 +31,10 @@ public class DeleteHR extends HttpServlet {
 		if (hrDao.isExistingById(Integer.parseInt(hrId))) {
 			hrDao.removeExistingById(Integer.parseInt(hrId));
 			request.setAttribute("deleteMessage", "<span style='color: green'>HR Deleted Successfully.</span>");
-			response.sendRedirect(request.getContextPath()+"/admin/hrList");
+			response.sendRedirect(request.getContextPath()+"/hrs");
 		} else {
 			request.setAttribute("deleteMessage", "<span style='color: red'>Sorry...! This HR Doesn't exists.</span>");
-			request.getRequestDispatcher("/admin/hrList").forward(request, response);
+			request.getRequestDispatcher("/hrs").forward(request, response);
 		}
 	}
 

@@ -35,7 +35,6 @@ Date OF Birth : <%=candidate.getDateOfBirth() %><br><br>
 Age :  <%=candidate.getAge() %><br><br>
 
 Address : <%=candidate.getAddress() %><br><br>
-
 </th>
 <td>
 <%=new String(candidate.getResume()) %>

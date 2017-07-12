@@ -1,4 +1,4 @@
-package com.hrsystem.dao.factory;
+package com.hrsystem.init;
 
 import com.hrsystem.dao.IAdminDao;
 import com.hrsystem.dao.ICandidateDao;

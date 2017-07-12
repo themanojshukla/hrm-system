@@ -26,6 +26,7 @@ public class Candidate {
 	private byte[] resume;
 	private String status;
 	private Ctc ctc;
+	private Interview interview;
 	
 	public int getId() {
 		return id;
@@ -86,6 +87,12 @@ public class Candidate {
 	}
 	public void setCtc(Ctc ctc) {
 		this.ctc = ctc;
+	}
+	public Interview getInterview() {
+		return interview;
+	}
+	public void setInterview(Interview interview) {
+		this.interview = interview;
 	}
 	
 	
